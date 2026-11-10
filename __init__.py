@@ -1,1 +1,1 @@
-# TrafficMind AI — utils package
+# TrafficMind AI — agents package
