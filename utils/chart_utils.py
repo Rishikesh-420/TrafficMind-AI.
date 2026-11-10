@@ -105,16 +105,27 @@ def hourly_trend_chart(trend_df: pd.DataFrame, corridor_name: str = "") -> go.Fi
         yaxis="y2",
         hovertemplate="%{x}: %{y}%<extra></extra>",
     ))
+    
+
     fig.update_layout(
-        **_LAYOUT_DEFAULTS,
+        **{k: v for k, v in _LAYOUT_DEFAULTS.items() if k != "yaxis"},
         title=dict(text=f"24-Hour Trend — {corridor_name}", font=dict(size=15)),
         yaxis=dict(title="Speed (km/h)", gridcolor=PALETTE["border"]),
-        yaxis2=dict(title="Congestion (%)", overlaying="y", side="right",
-                    gridcolor=PALETTE["border"], range=[0, 100]),
+        yaxis2=dict(
+            title="Congestion (%)",
+            overlaying="y",
+            side="right",
+            gridcolor=PALETTE["border"],
+            range=[0, 100],
+        ),
         legend=dict(orientation="h", yanchor="bottom", y=1.02),
         height=320,
     )
     return fig
+
+
+
+
 
 
 def accident_severity_pie(accident_df: pd.DataFrame) -> go.Figure:
